@@ -3,92 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to BitHub</title>
+    <meta name="description" content="BitHub – The student resource hub for BIT Mesra and BIT Jaipur. Select your campus to access notes, resources, and more.">
+    <title>BitHub — Campus Resource Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
+        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+        :root {
+            --bg: #080808;
+            --surface: #111111;
+            --border: #2a2a2a;
+            --border-hover: #555555;
+            --text-primary: #f0f0f0;
+            --text-secondary: #888888;
+            --accent: #f0f0f0;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
         body {
-            font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
-            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            /* Subtle dark grid texture */
+            background-image:
+                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 48px 48px;
+            color: var(--text-primary);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding: 2rem;
+            padding: clamp(1.5rem, 5vw, 3rem);
+        }
+
+        /* ── Header group ── */
+        .header {
+            text-align: center;
+            margin-bottom: clamp(2.5rem, 6vw, 4rem);
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            padding: 0.35rem 0.85rem;
+            margin-bottom: 1.5rem;
         }
 
         h1 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            margin-bottom: 0.5rem;
+            font-size: clamp(2.2rem, 6vw, 3.75rem);
             font-weight: 700;
-            background: linear-gradient(to right, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-align: center;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            color: var(--text-primary);
         }
 
-        p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            margin-bottom: 3rem;
-            color: #94a3b8;
-            text-align: center;
+        .subtitle {
+            margin-top: 1rem;
+            font-size: clamp(0.9rem, 2vw, 1.05rem);
+            font-weight: 400;
+            color: var(--text-secondary);
+            letter-spacing: 0.01em;
         }
 
+        /* ── Divider ── */
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: var(--border-hover);
+            margin: 2.5rem auto 0;
+        }
+
+        /* ── Campus cards ── */
         .container {
             display: flex;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 1.25rem;
             justify-content: center;
             width: 100%;
-            max-width: 600px;
+            max-width: 580px;
         }
 
         .box {
+            position: relative;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            max-width: 250px;
-            height: 120px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            color: #ffffff;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-end;
+            flex: 1 1 220px;
+            min-width: 200px;
+            max-width: 270px;
+            height: 140px;
+            padding: 1.25rem 1.5rem;
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
             text-decoration: none;
-            font-size: 1.25rem;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: border-color 0.25s ease, background-color 0.25s ease;
+        }
+
+        /* Corner accent — top right */
+        .box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 28px 28px 0;
+            border-color: transparent var(--border) transparent transparent;
+            transition: border-color 0.25s ease;
         }
 
         .box:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background-color: #161616;
+            border-color: var(--border-hover);
         }
-        
+
+        .box:hover::before {
+            border-color: transparent var(--border-hover) transparent transparent;
+        }
+
+        .box-label {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .box-name {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        /* Arrow indicator */
+        .box-arrow {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            transition: transform 0.25s ease, color 0.25s ease;
+        }
+
+        .box:hover .box-arrow {
+            transform: translate(3px, -3px);
+            color: var(--text-primary);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: #333333;
+            text-transform: uppercase;
+        }
+
+        /* ── Responsive ── */
         @media (max-width: 480px) {
             .box {
+                flex: 1 1 100%;
                 max-width: 100%;
-                height: 100px;
+                height: 120px;
             }
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to BitHub</h1>
-    <p>Select your campus to get started</p>
-    <div class="container">
-        <a href="bit-mesra/index.html" class="box">BIT MESRA</a>
-        <a href="bit-jaipur/index.html" class="box">BIT JAIPUR</a>
+
+    <div class="header">
+        <span class="eyebrow">Student Resource Hub</span>
+        <h1>BitHub</h1>
+        <p class="subtitle">Access notes, resources, and tools for your campus.</p>
+        <div class="divider"></div>
     </div>
+
+    <div class="container">
+        <a href="bit-mesra/index.html" class="box">
+            <span class="box-arrow">↗</span>
+            <span class="box-label">Campus</span>
+            <span class="box-name">BIT Mesra</span>
+        </a>
+        <a href="bit-jaipur/index.html" class="box">
+            <span class="box-arrow">↗</span>
+            <span class="box-label">Campus</span>
+            <span class="box-name">BIT Jaipur</span>
+        </a>
+    </div>
+
+    <footer class="footer">2026&ndash;2027 Birla Institute of Technology, Mesra &nbsp;|&nbsp; Designed &amp; Developed by Team BitHub. All Rights Reserved.</footer>
+
 </body>
 </html>
