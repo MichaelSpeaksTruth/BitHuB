@@ -1,0 +1,1 @@
+var e=window.location.hostname.includes(`github.io`)?`https://bithub-jaipur.onrender.com`:``;export{e as t};
