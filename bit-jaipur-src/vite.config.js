@@ -17,6 +17,7 @@ export default defineConfig({
   base: './',
 
   build: {
+    /* Output to ../bit-jaipur directory for GitHub Pages */
     /* Output to bit-jaipur/ directory at the root */
     outDir: '../bit-jaipur',
     emptyOutDir: true,
@@ -60,6 +61,18 @@ export default defineConfig({
     allowedHosts: true,
     /* Proxy backend requests to bypass PNA popup and CORS */
     proxy: {
+      '/api': {
+        target: process.env.VITE_BACKEND_URL || 'http://localhost:3001',
+        changeOrigin: true
+      },
+      '/study-material': {
+        target: process.env.VITE_BACKEND_URL || 'http://localhost:3001',
+        changeOrigin: true
+      },
+      '/dev-root': {
+        target: process.env.VITE_BACKEND_URL || 'http://localhost:3001',
+        changeOrigin: true
+      }
       '/api': 'http://localhost:3001',
       '/study-material': 'http://localhost:3001',
       '/dev-root': 'http://localhost:3001'
