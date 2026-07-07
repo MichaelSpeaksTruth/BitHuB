@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import OnlineJudge from './OnlineJudge';
+import { API_BASE } from '../config';
 import './LabDashboard.css';
 
 const CS24102Dashboard = ({ theme, onBack }) => {
@@ -9,6 +10,7 @@ const CS24102Dashboard = ({ theme, onBack }) => {
 
   useEffect(() => {
     fetch((import.meta.env.VITE_API_BASE_URL || '') + '/api/cs-problems')
+    fetch(`${API_BASE}/api/cs-problems`)
       .then(res => res.json())
       .then(data => {
         setProblems(data.problems || []);

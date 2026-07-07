@@ -23,6 +23,9 @@ import mesraImg from '../images/mesra.png';
 
 function App() {
   const [view, setView] = useState('landing'); // 'landing', 'subject-selector', 'subject-dashboard'
+
+function App() {
+  const [view, setView] = useState('subject-selector'); // 'landing', 'subject-selector', 'subject-dashboard'
   const [theme, setTheme] = useState('light'); // 'light', 'dark'
   const [selectedSubjectCode, setSelectedSubjectCode] = useState(null);
   
@@ -219,6 +222,7 @@ function App() {
         );
       }
     } else if (view === 'subject-selector') {
+    } else {
       content = (
         <Suspense fallback={<div className="practice-loader-container"><div className="practice-spinner"></div></div>}>
           <SubjectSelector
@@ -285,6 +289,10 @@ function App() {
             © 2025–2026 Birla Institute of Technology | Team BitHub
           </footer>
         </main>
+      );
+            onBackToLanding={() => window.location.href = '../index.html'}
+          />
+        </Suspense>
       );
     }
 
