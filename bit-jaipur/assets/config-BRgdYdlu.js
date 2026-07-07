@@ -1,0 +1,1 @@
+var e=`https://bithub-jaipur.onrender.com`;export{e as t};

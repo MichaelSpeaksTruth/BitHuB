@@ -8,7 +8,6 @@ import './LabDashboard.css';
 
 const SEM1_LABS = {
   "ME24102": { name: "Engineering Drawing", icon: "pencil" },
-  "EC24102": { name: "Electrical Engineering", icon: "chip" },
   "EC24102": { name: "Electronics Lab", icon: "chip" },
   "CH24102": { name: "Chemistry Lab", icon: "flask" },
   "PE24102": { name: "Engineering Workshop", icon: "wrench" }
@@ -35,11 +34,9 @@ const shopFiles = {
   ],
   "Fitting": [
     "2025-11-08 13-11-53.pdf",
-    "WhatsApp Unknown 2025-12-04 at 8.04.59 PM.zip"
+    "WhatsApp Unknown 2025-12-04 at 8.04.59 PM.zip",
     "2025-09-18 15-51-42.pdf",
-    "2025-10-09 15-13-34.pdf"
-  ],
-  "Fitting": [
+    "2025-10-09 15-13-34.pdf",
     "2025-10-30 15-12-55.pdf",
     "fitting 1st.zip",
     "fitting 2nd .zip"
@@ -386,16 +383,11 @@ const LabDashboard = ({ subjectCode, theme, onToggleTheme, onBack }) => {
                 </div>
               </div>
               <div className="subjects-button-list" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem'}}>
-                {["1. Engg. Drawing Notes .pdf", "2. Drawing Notes.pdf", "3. Proj of Solid.pdf"].map((pdf, idx) => (
+                {["1. Engg. Drawing Notes .pdf", "2. Drawing Notes.pdf", "3. Proj of Solid.pdf", "ACAD_Basic_Commands.pdf", "autocad-commands.pdf", "isometric.pdf"].map((pdf, idx) => (
                   <button 
                     key={idx}
                     className="subject-selection-btn"
-                    onClick={() => window.open(`${import.meta.env.VITE_API_BASE_URL || ''}/study-material/ME24102/${pdf}`, '_blank')}
-                {["ACAD_Basic_Commands.pdf", "autocad-commands.pdf", "isometric.pdf"].map((pdf, idx) => (
-                  <button 
-                    key={idx}
-                    className="subject-selection-btn"
-                    onClick={() => window.open(`${API_BASE}/study-material/ME24102/${pdf}`, '_blank')}
+                    onClick={() => window.open(`${API_BASE}/study-material/ME24102/${encodeURIComponent(pdf)}`, '_blank')}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
                       {renderFileIcon(false)}
@@ -492,7 +484,6 @@ const LabDashboard = ({ subjectCode, theme, onToggleTheme, onBack }) => {
               <div className="subjects-button-list" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem'}}>
                 <button 
                   className="subject-selection-btn"
-                  onClick={() => window.open(`${import.meta.env.VITE_API_BASE_URL || ''}/study-material/PH24102/physics_lab.pdf`, '_blank')}
                   onClick={() => window.open(`${API_BASE}/study-material/PH24102/physics_lab.pdf`, '_blank')}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
@@ -569,7 +560,6 @@ const LabDashboard = ({ subjectCode, theme, onToggleTheme, onBack }) => {
               <div className="subjects-button-list" style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem'}}>
                 <button 
                   className="subject-selection-btn"
-                  onClick={() => window.open(`${import.meta.env.VITE_API_BASE_URL || ''}/study-material/${selectedLab}/${isEC ? 'ece_lab.pdf' : 'chemistry_lab.pdf'}`, '_blank')}
                   onClick={() => window.open(`${API_BASE}/study-material/${selectedLab}/${isEC ? 'ece_lab.pdf' : 'chemistry_lab.pdf'}`, '_blank')}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
@@ -662,7 +652,6 @@ const LabDashboard = ({ subjectCode, theme, onToggleTheme, onBack }) => {
                     <button 
                       key={idx}
                       className="subject-selection-btn"
-                      onClick={() => window.open(`${import.meta.env.VITE_API_BASE_URL || ''}/study-material/PE24102/${activePEShop}/${file}`, '_blank')}
                       onClick={() => window.open(`${API_BASE}/study-material/PE24102/${activePEShop}/${file}`, '_blank')}
                     >
                       <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
@@ -756,7 +745,6 @@ const ME24102Modal = ({ activeMEModal, setActiveMEModal, renderImageIcon }) => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/study-material/files?folder=ME24102/${encodeURIComponent(activeMEModal)}`)
     fetch(`${API_BASE}/api/study-material/files?folder=ME24102/${encodeURIComponent(activeMEModal)}`)
       .then(res => res.json())
       .then(data => {
@@ -792,7 +780,6 @@ const ME24102Modal = ({ activeMEModal, setActiveMEModal, renderImageIcon }) => {
                 <button 
                   key={idx}
                   className="subject-selection-btn"
-                  onClick={() => window.open(`${import.meta.env.VITE_API_BASE_URL || ''}/study-material/ME24102/${encodeURIComponent(activeMEModal)}/${encodeURIComponent(file)}`, '_blank')}
                   onClick={() => window.open(`${API_BASE}/study-material/ME24102/${encodeURIComponent(activeMEModal)}/${encodeURIComponent(file)}`, '_blank')}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>

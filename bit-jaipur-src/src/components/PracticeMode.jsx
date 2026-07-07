@@ -67,9 +67,7 @@ const HaTeXBlock = ({ math }) => {
     return <div style={{ color: '#c65575' }}>{math}</div>;
   }
 };
-import React, { useState, useEffect } from 'react';
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
 import { API_BASE } from '../config';
 
 
@@ -134,8 +132,6 @@ const renderLatex = (textVal) => {
             return part.isBlock
               ? <div key={i} style={{ overflowX: 'auto', maxWidth: '100%', margin: '0.5rem 0' }}><HaTeXBlock math={part.content.trim()} /></div>
               : <HaTeXInline key={i} math={part.content.trim()} />;
-              ? <div key={i} style={{ overflowX: 'auto', maxWidth: '100%', margin: '0.5rem 0' }}><BlockMath math={part.content.trim()} /></div>
-              : <InlineMath key={i} math={part.content.trim()} />;
           } catch { return <span key={i} style={{ color: '#c65575' }}>{part.content}</span>; }
         })}
       </div>
@@ -149,8 +145,6 @@ const renderLatex = (textVal) => {
       return hasBlock
         ? <div style={{ overflowX: 'auto', maxWidth: '100%' }}><HaTeXBlock math={text} /></div>
         : <div style={{ lineHeight: '1.8' }}><HaTeXInline math={text} /></div>;
-        ? <div style={{ overflowX: 'auto', maxWidth: '100%' }}><BlockMath math={text} /></div>
-        : <div style={{ lineHeight: '1.8' }}><InlineMath math={text} /></div>;
     } catch {
       return <span style={{ whiteSpace: 'normal', wordBreak: 'break-word' }}>{text}</span>;
     }
@@ -332,8 +326,7 @@ function PracticeMode({ subjectCode, selectedModules, difficulties = ['Easy', 'M
         
         for (const mod of selectedModules) {
           const modNumber = mod.replace('mod', '');
-          const res = await fetch(`${import.meta.env.VITE_API_BASE_URL || ''}/api/practice/questions?subject=${subjectCode}&module=${modNumber}&difficulty=${diffsStr}&year=${yearsStr}&marks=${marksStr}&latex_support=true`);
-          const res = await fetch(`${API_BASE}/api/practice/questions?subject=${subjectCode}&module=${modNumber}&difficulty=${diffsStr}&year=${yearsStr}&marks=${marksStr}`);
+          const res = await fetch(`${API_BASE}/api/practice/questions?subject=${subjectCode}&module=${modNumber}&difficulty=${diffsStr}&year=${yearsStr}&marks=${marksStr}&latex_support=true`);
           const data = await res.json();
           if (data.questions) {
             allQs = [...allQs, ...data.questions];
@@ -495,7 +488,6 @@ function PracticeMode({ subjectCode, selectedModules, difficulties = ['Easy', 'M
 
     setLoadingCheck(true);
     try {
-      const res = await fetch((import.meta.env.VITE_API_BASE_URL || '') + '/api/practice/check', {
       const res = await fetch(`${API_BASE}/api/practice/check`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -521,7 +513,6 @@ function PracticeMode({ subjectCode, selectedModules, difficulties = ['Easy', 'M
 
     setLoadingCheck(true);
     try {
-      const res = await fetch((import.meta.env.VITE_API_BASE_URL || '') + '/api/practice/check', {
       const res = await fetch(`${API_BASE}/api/practice/check`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -542,7 +533,6 @@ function PracticeMode({ subjectCode, selectedModules, difficulties = ['Easy', 'M
     if (!code.trim()) return;
     setCodeRunning(true);
     try {
-      const res = await fetch((import.meta.env.VITE_API_BASE_URL || '') + '/api/practice/compile', {
       const res = await fetch(`${API_BASE}/api/practice/compile`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

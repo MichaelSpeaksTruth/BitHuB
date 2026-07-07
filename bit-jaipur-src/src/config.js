@@ -5,6 +5,6 @@
  * locally (development with Vite proxy) or in production on GitHub Pages / Vercel.
  */
 
-export const API_BASE = import.meta.env.DEV
+export const API_BASE = import.meta.env.VITE_API_BASE_URL || (import.meta.env.DEV
   ? ''
-  : 'https://bithub-jaipur.onrender.com';
+  : 'https://bithub-jaipur.onrender.com');

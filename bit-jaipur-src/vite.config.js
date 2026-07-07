@@ -73,9 +73,6 @@ export default defineConfig({
         target: process.env.VITE_BACKEND_URL || 'http://localhost:3001',
         changeOrigin: true
       }
-      '/api': 'http://localhost:3001',
-      '/study-material': 'http://localhost:3001',
-      '/dev-root': 'http://localhost:3001'
     }
   },
 });
