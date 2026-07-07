@@ -8,18 +8,11 @@
  */
 
 import { useState, useCallback, useRef, useEffect, lazy, Suspense } from 'react';
-import CampusCard from './components/CampusCard';
-import Toast from './components/Toast';
 
 const SubjectSelector = lazy(() => import('./components/SubjectSelector'));
 const JaipurDashboard = lazy(() => import('./components/JaipurDashboard'));
 const LabDashboard = lazy(() => import('./components/LabDashboard'));
 import confetti from 'canvas-confetti';
-
-/* Import campus images from the images directory */
-import jaipurImg from '../images/jaipur.png';
-import mesraImg from '../images/mesra.png';
-// import mananImg from '../ProfilePics/mananonhisweddingnight.jpg'; // BACKUP 69 EASTER EGG
 
 function App() {
   const [view, setView] = useState('subject-selector'); // 'landing', 'subject-selector', 'subject-dashboard'
@@ -27,9 +20,6 @@ function App() {
   const [selectedSubjectCode, setSelectedSubjectCode] = useState(null);
   
   const [isMobileMode, setIsMobileMode] = useState(false);
-  const [toastVisible, setToastVisible] = useState(false);
-  const [toastMessage, setToastMessage] = useState('');
-  const timerRef = useRef(null);
   const wobbleTimeoutRef = useRef(null);
 
   /* Synchronize html theme attribute with React state */
@@ -53,25 +43,6 @@ function App() {
   /* Toggle Light / Dark Mode globally */
   const toggleTheme = useCallback(() => {
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
-  }, []);
-
-  /* Show a toast notification when a disabled campus is clicked */
-  const handleDisabledClick = useCallback((campusName) => {
-    if (timerRef.current) clearTimeout(timerRef.current);
-
-    setToastMessage(`${campusName} campus is coming soon!`);
-    setToastVisible(true);
-
-    timerRef.current = setTimeout(() => {
-      setToastVisible(false);
-    }, 2500);
-  }, []);
-
-  /* Cleanup timer on unmount */
-  useEffect(() => {
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
   }, []);
 
   /* Easter egg: listen for '67' to trigger confetti and wobbly page tilt */
